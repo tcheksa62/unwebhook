@@ -145,6 +145,13 @@ This data is drawn from the `ref` field, with the `/refs/heads/` prefix stripped
 AllowBranches = [ "master" ]
 ```
 
+#### AllowPipelineStatus
+A list of pipeline status allowed to handle.
+
+```
+AllowPipelineStatus = [ "success", "failed" ]
+```
+
 #### Secret 
 
 A string used as a key to calculate an HMAC digest of the request body. Requests that don't have a matching
