@@ -92,6 +92,26 @@ func (hook *Hook) Execute(e Event) {
 			return
 		}
 	}
+	if len(hook.AllowPipelineStatus) != 0 {
+		pipelineStatus, ok := e["status"].(string)
+		if !ok {
+			glog.Warningf("Received non-string Pipeline Status %T: %v", pipelineStatus, pipelineStatus)
+			return
+		}
+
+		allowed := false
+		for _, allowPipelineStatus := range hook.AllowPipelineStatus {
+			if allowPipelineStatus == pipelineStatus {
+				allowed = true
+				break
+			}
+		}
+
+		if !allowed {
+			glog.Infof("Hook %s called for incorrect pipeline status %s\n", hook.Url, pipelineStatus)
+			return
+		}
+	}
 
 	if len(hook.AllowBranches) != 0 {
 		ref, ok := e["ref"].(string)

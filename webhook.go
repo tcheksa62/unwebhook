@@ -29,6 +29,9 @@ type Hook struct {
 	// If empty, all events are accepted.
 	AllowEvent []string
 
+	// If empty, all pipeline status ar accepted
+	AllowPipelineStatus []string
+
 	// Trigger the hook on changes to the following branches. If empty,
 	// the hook does not match on a particular branch.
 	AllowBranches []string
